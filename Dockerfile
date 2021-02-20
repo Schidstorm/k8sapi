@@ -1,8 +1,11 @@
 FROM golang as build
 
-RUN go get -u github.com/schidstorm/k8sapi/...
+ENV CGO_ENABLED=0
+RUN go install github.com/schidstorm/k8sapi@latest
 
-FROM busybox
 
-COPY --from=build /go/bin/k8sapi /k8sapi
-ENTRYPOINT '/k8sapi'
+FROM alpine
+
+RUN mkdir -p /usr/local/bin
+COPY --from=build /go/bin/* /usr/local/bin/
+ENTRYPOINT 'k8sapi'
