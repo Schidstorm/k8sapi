@@ -1,5 +1,8 @@
-FROM golang
+FROM golang as build
 
-RUN go get github.com/schidstorm/k8sapi/...
-WORKDIR /go/src/github.com/schidstorm/k8sapi/
-RUN go build -i github.com/schidstorm/k8sapi
+RUN go get -u github.com/schidstorm/k8sapi/@master
+
+FROM busybox
+
+COPY --from=build /go/bin/k8sapi /k8sapi
+ENTRYPOINT '/k8sapi'
