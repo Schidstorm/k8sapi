@@ -1,6 +1,6 @@
 FROM golang as build
 
-RUN go get -u github.com/schidstorm/k8sapi/@master
+RUN go get -u github.com/schidstorm/k8sapi/...
 
 FROM busybox
 
