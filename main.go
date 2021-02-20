@@ -1,4 +1,4 @@
-package k8sapi
+package main
 
 import "fmt"
 
