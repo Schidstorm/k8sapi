@@ -1,0 +1,1 @@
+module "github.com/schidstorm/k8sapi"
